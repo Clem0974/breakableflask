@@ -6,7 +6,9 @@ jobs:
     steps:
       - name: Dependances
         run: |
-          echo "ecrire ici le scrypt de contrôle des dépendances"
+          echo "docker run --rm -v "$PWD:/src" aquasec/trivy:latest fs \
+            --scanners vuln --severity HIGH,CRITICAL --exit-code 1 \
+            /src/requirements.txt"
   Dockerfile:
     runs-on: ubuntu-latest
     needs: Dependances
